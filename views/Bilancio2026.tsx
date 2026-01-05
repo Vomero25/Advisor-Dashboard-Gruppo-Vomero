@@ -1,172 +1,157 @@
 
 import React from 'react';
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, Cell } from 'recharts';
+import { ShieldAlert, TrendingUp, Zap, Briefcase, Calculator, Landmark } from 'lucide-react';
 
 const Bilancio2026: React.FC = () => {
-  const news = [
+  const requirementChanges = [
+    { year: '2025-26', vecchiaia: '67y 0m', anticipataU: '42y 10m' },
+    { year: '2027', vecchiaia: '67y 1m', anticipataU: '42y 11m' },
+    { year: '2028+', vecchiaia: '67y 3m', anticipataU: '43y 1m' },
+  ];
+
+  const highlights = [
     {
-      title: "Innalzamento Deducibilità Fiscale",
-      description: "Il limite massimo di deducibilità dei contributi versati sale da 5.164,57€ a 5.300€ annui per incentivare in modo robusto il risparmio previdenziale integrativo.",
-      badge: "Incentivo",
-      icon: "📈"
+      title: "Contributo Datoriale Portabile",
+      desc: "Abrogato il vincolo: il lavoratore può portare il contributo del datore anche in FPA e PIP. Opportunità di switch da fondi negoziali.",
+      impact: "Commerciale",
+      color: "blue"
     },
     {
-      title: "Più Capitale al Pensionamento",
-      description: "Il limite ordinario per l'erogazione della prestazione in capitale sale dal 50% al 60% del montante finale accumulato al momento della pensione.",
-      badge: "Flessibilità",
-      icon: "💰"
+      title: "Capitale al 60%",
+      desc: "Innalzata la quota di montante liquidabile subito in capitale dal 50% al 60%. Maggiore liquidità al pensionamento.",
+      impact: "Flessibilità",
+      color: "emerald"
     },
     {
-      title: "Portabilità Contributo Datoriale",
-      description: "Piena libertà per il lavoratore di trasferire il contributo a carico del datore di lavoro anche verso fondi aperti (FPA) e PIP, eliminando il vincolo dei fondi negoziali.",
-      badge: "Rivoluzionario",
-      icon: "🔄"
+      title: "Nuovo Tetto 5.300€",
+      desc: "Aggiornato il limite di deducibilità fermo da 20 anni. Maggior risparmio fiscale per i redditi alti.",
+      impact: "Fiscale",
+      color: "orange"
     },
     {
-      title: "Nuove Opzioni di Erogazione",
-      description: "Introdotta la 'rendita a durata definita' e nuovi schemi di prelievo flessibile dal montante accumulato per una gestione sartoriale della quiescenza.",
-      badge: "Personalizzazione",
-      icon: "📋"
-    },
-    {
-      title: "Adesione Silenzio-Assenso",
-      description: "Meccanismo di adesione automatica per i neo-assunti con investimento di default basato su un profilo 'Life Cycle' ottimizzato per la durata residua lavorativa.",
-      badge: "Automatico",
-      icon: "⚙️"
-    },
-    {
-      title: "TFR al Fondo Tesoreria INPS",
-      description: "Aggiornamento delle soglie dimensionali aziendali per l'obbligo di conferimento del TFR non optato verso il Fondo di Tesoreria INPS.",
-      badge: "Aziendale",
-      icon: "🏢"
+      title: "Default Life Cycle",
+      desc: "Le adesioni 'tacite' non finiscono più nel garantito ma in percorsi Life Cycle che massimizzano i rendimenti dei giovani.",
+      impact: "Rendimenti",
+      color: "indigo"
     }
   ];
 
-  const lifeCycleData = [
-    { age: 25, azionario: 90, obbligazionario: 10, garantito: 0 },
-    { age: 30, azionario: 85, obbligazionario: 15, garantito: 0 },
-    { age: 35, azionario: 80, obbligazionario: 20, garantito: 0 },
-    { age: 40, azionario: 65, obbligazionario: 35, garantito: 0 },
-    { age: 45, azionario: 50, obbligazionario: 50, garantito: 0 },
-    { age: 50, azionario: 35, obbligazionario: 55, garantito: 10 },
-    { age: 55, azionario: 20, obbligazionario: 60, garantito: 20 },
-    { age: 60, azionario: 10, obbligazionario: 50, garantito: 40 },
-    { age: 65, azionario: 5, obbligazionario: 35, garantito: 60 },
-  ];
-
   return (
-    <div className="max-w-4xl mx-auto space-y-12 animate-in fade-in zoom-in-95 duration-500 pb-16">
-      <header className="text-center space-y-6">
-        <div className="space-y-1">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">Legge di Bilancio 2026</h2>
-          <p className="text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">Elaborazione a cura di dr. Raffaele Camposano Group Manager</p>
-        </div>
-        
-        <div className="inline-block px-5 py-2 bg-orange-100 text-orange-700 text-sm font-extrabold rounded-2xl border border-orange-200 uppercase shadow-sm">
-          Analisi Normativa e Novità Fiscali
-        </div>
-
-        <div className="bg-white border border-slate-200 p-6 rounded-3xl max-w-2xl mx-auto shadow-sm">
-          <p className="text-slate-600 text-[10px] md:text-xs leading-relaxed font-semibold italic">
-            <span className="font-bold uppercase text-slate-900 not-italic mb-1.5 block tracking-widest">Riferimenti Normativi Estesi per Esteso:</span>
-            Le analisi e le proiezioni qui esposte si fondano sulla consultazione della <span className="font-bold text-slate-900">Bozza della Legge di Bilancio 2026 (Documento Programmatico di Bilancio)</span>, sui <span className="font-bold text-slate-900">Comunicati Ufficiali del Ministero dell'Economia e delle Finanze (MEF)</span> e sulle Note Tecniche di indirizzo formulate dalla <span className="font-bold text-slate-900">COVIP</span> in merito alla riforma organica della previdenza complementare.
-          </p>
+    <div className="max-w-6xl mx-auto space-y-10 pb-20 animate-fade-in">
+      {/* Header Strategico */}
+      <header className="bg-slate-900 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full -mr-32 -mt-32 blur-3xl"></div>
+        <div className="relative z-10">
+          <h1 className="text-4xl font-black uppercase italic tracking-tighter mb-2">
+            Legge di Bilancio 2026: <span className="text-blue-500">Guida per il Consulente</span>
+          </h1>
+          <p className="text-slate-400 font-bold uppercase text-xs tracking-widest">Analisi Tecnica Gruppo Vomero - Dr. Raffaele Camposano</p>
         </div>
       </header>
 
-      {/* News Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-        {news.map((item, idx) => (
-          <div key={idx} className="group bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all hover:-translate-y-1 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-blue-600/5 rounded-full -mr-12 -mt-12 group-hover:scale-125 transition-transform"></div>
-            <div className="flex items-start gap-5 relative z-10">
-              <div className="text-5xl">{item.icon}</div>
-              <div className="space-y-3">
-                <div className="space-y-1">
-                  <div className="inline-block px-2.5 py-0.5 bg-blue-50 text-blue-600 text-[9px] font-bold rounded-md uppercase border border-blue-100 mb-1">
-                    {item.badge}
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 leading-tight">{item.title}</h3>
-                </div>
-                <p className="text-slate-500 text-sm leading-relaxed font-medium">
-                  {item.description}
-                </p>
-              </div>
+      {/* Grid Novità Previdenza Complementare */}
+      <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {highlights.map((h, i) => (
+          <div key={i} className="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl transition-all group">
+            <div className={`w-10 h-10 rounded-xl bg-${h.color}-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+              {i === 0 && <Briefcase className="text-blue-600" size={20} />}
+              {i === 1 && <Landmark className="text-emerald-600" size={20} />}
+              {i === 2 && <Calculator className="text-orange-600" size={20} />}
+              {i === 3 && <TrendingUp className="text-indigo-600" size={20} />}
             </div>
+            <span className={`text-[9px] font-black uppercase tracking-widest text-${h.color}-600 mb-1 block`}>{h.impact}</span>
+            <h3 className="text-sm font-black text-slate-900 mb-2 uppercase leading-tight">{h.title}</h3>
+            <p className="text-xs text-slate-500 font-medium leading-relaxed">{h.desc}</p>
           </div>
         ))}
+      </section>
+
+      {/* Focus Commerciale: Portabilità */}
+      <div className="bg-blue-600 rounded-[3rem] p-10 text-white flex flex-col md:flex-row items-center gap-10 shadow-2xl shadow-blue-200">
+        <div className="space-y-4 md:w-2/3">
+          <div className="flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full w-fit">
+            <Zap size={14} className="text-yellow-300" />
+            <span className="text-[10px] font-black uppercase tracking-widest">Vantaggio Competitivo</span>
+          </div>
+          <h2 className="text-3xl font-black uppercase italic">Fine del Vincolo sui Fondi Negoziali</h2>
+          <p className="text-blue-100 text-sm leading-relaxed">
+            La manovra 2026 ha abrogato la norma che limitava il contributo datoriale ai soli fondi negoziali. 
+            Il consulente può ora proporre lo spostamento delle masse verso i <strong>PIP Zurich</strong> o i <strong>FPA Anima</strong> mantenendo il flusso contributivo dell'azienda. 
+            È lo strumento definitivo per la conquista della clientela corporate.
+          </p>
+        </div>
+        <div className="md:w-1/3 bg-white/10 backdrop-blur-md p-6 rounded-[2rem] border border-white/20">
+          <p className="text-center text-[10px] font-black uppercase tracking-widest mb-4">Target Consigliato</p>
+          <ul className="space-y-2">
+            {['Iscritti Fonchim/Cometa', 'Clienti con TFR in azienda', 'Quadri e Dirigenti'].map(t => (
+              <li key={t} className="flex items-center gap-2 text-xs font-bold">
+                <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div> {t}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      {/* Life Cycle Chart Section */}
-      <div className="bg-white p-8 md:p-12 rounded-[40px] border border-slate-200 shadow-sm space-y-10 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 via-indigo-400 to-slate-200"></div>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="space-y-2">
-            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">Evoluzione Strategia 'Life Cycle'</h3>
-            <p className="text-slate-500 text-xs font-bold uppercase tracking-widest italic">Fonte: Proiezioni Standard COVIP per adesioni silenti 2026</p>
+      <div className="grid lg:grid-cols-2 gap-10">
+        {/* Requisiti Pensione Pubblica */}
+        <div className="bg-white p-10 rounded-[3rem] border border-slate-200 shadow-sm space-y-8">
+          <h3 className="text-xl font-black text-slate-900 uppercase italic flex items-center gap-3">
+             <Landmark className="text-blue-600" /> Requisiti Pensionistici 2027-2028
+          </h3>
+          <div className="overflow-hidden rounded-2xl border border-slate-100">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-slate-50 text-slate-400 font-black uppercase text-[9px]">
+                <tr>
+                  <th className="px-6 py-4">Anno</th>
+                  <th className="px-6 py-4">Vecchiaia</th>
+                  <th className="px-6 py-4">Anticipata (U)</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-50">
+                {requirementChanges.map((r, i) => (
+                  <tr key={i} className={i === 2 ? 'bg-blue-50/50' : ''}>
+                    <td className="px-6 py-4 font-black">{r.year}</td>
+                    <td className="px-6 py-4 font-bold text-slate-600">{r.vecchiaia}</td>
+                    <td className="px-6 py-4 font-bold text-slate-600">{r.anticipataU}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-          <div className="flex flex-wrap gap-4 text-[10px] font-bold uppercase tracking-tighter">
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 rounded-full border border-blue-100">
-              <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shadow-sm shadow-blue-200"></span> Azionario
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
-              <span className="w-2.5 h-2.5 rounded-full bg-indigo-400 shadow-sm shadow-indigo-200"></span> Obbligazionario
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 rounded-full border border-slate-200">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-200 shadow-sm"></span> Garantito
-            </div>
+          <div className="p-4 bg-amber-50 rounded-2xl border border-amber-100 flex gap-3">
+            <ShieldAlert className="text-amber-600 shrink-0" size={20} />
+            <p className="text-[10px] text-amber-800 font-bold leading-relaxed">
+              <strong>ATTENZIONE:</strong> Abrogata la possibilità di cumulare la rendita del fondo pensione per raggiungere la soglia di accesso alla pensione anticipata contributiva (dietrofront rispetto al 2025).
+            </p>
           </div>
         </div>
 
-        <div className="h-[400px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={lifeCycleData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorAzn" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#2563eb" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#2563eb" stopOpacity={0.1}/>
-                </linearGradient>
-                <linearGradient id="colorObb" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#818cf8" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#818cf8" stopOpacity={0.1}/>
-                </linearGradient>
-                <linearGradient id="colorGar" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#e2e8f0" stopOpacity={0.8}/>
-                  <stop offset="95%" stopColor="#e2e8f0" stopOpacity={0.1}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-              <XAxis 
-                dataKey="age" 
-                label={{ value: 'Età del sottoscrittore (anni)', position: 'insideBottom', offset: -10, fontSize: 11, fontWeight: 700, fill: '#64748b' }} 
-                tick={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }}
-              />
-              <YAxis 
-                unit="%" 
-                tick={{ fontSize: 11, fontWeight: 600, fill: '#64748b' }}
-              />
-              <Tooltip 
-                contentStyle={{ borderRadius: '24px', border: 'none', boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)', padding: '20px' }}
-                formatter={(value) => [`${value}%`]}
-                labelFormatter={(label) => `PROFILO ETA': ${label} ANNI`}
-              />
-              <Area type="monotone" dataKey="azionario" stroke="#2563eb" strokeWidth={3} fillOpacity={1} fill="url(#colorAzn)" stackId="1" />
-              <Area type="monotone" dataKey="obbligazionario" stroke="#818cf8" strokeWidth={3} fillOpacity={1} fill="url(#colorObb)" stackId="1" />
-              <Area type="monotone" dataKey="garantito" stroke="#cbd5e1" strokeWidth={3} fillOpacity={1} fill="url(#colorGar)" stackId="1" />
-            </AreaChart>
-          </ResponsiveContainer>
+        {/* Nuove Opzioni Erogazione */}
+        <div className="bg-slate-50 p-10 rounded-[3rem] border border-slate-200 space-y-8">
+          <h3 className="text-xl font-black text-slate-900 uppercase italic flex items-center gap-3">
+             <TrendingUp className="text-indigo-600" /> Nuove Erogazioni Flessibili
+          </h3>
+          <div className="space-y-4">
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+              <h4 className="text-xs font-black text-slate-800 uppercase mb-1">Rendita a Durata Definita</h4>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-medium">Corrisposta per un numero di anni pari alla speranza di vita residua. Calcolo dinamico sul montante accumulato.</p>
+            </div>
+            <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+              <h4 className="text-xs font-black text-slate-800 uppercase mb-1">Prelievi Liberamente Determinabili</h4>
+              <p className="text-[11px] text-slate-500 leading-relaxed font-medium">Possibilità di mantenere il fondo attivo e prelevare "a chiamata" entro i limiti della rendita teorica.</p>
+            </div>
+            <div className="bg-indigo-900 text-white p-5 rounded-2xl shadow-lg border border-indigo-700">
+              <h4 className="text-xs font-black uppercase mb-1 text-indigo-300">Nuova Tassazione (20% -> 15%)</h4>
+              <p className="text-[11px] opacity-80 leading-relaxed">Le nuove prestazioni sono soggette a una ritenuta del 20%, riducibile dello 0,25% annuo dopo il 15° anno, fino al 15% minimo.</p>
+            </div>
+          </div>
         </div>
-        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest text-center italic leading-relaxed">
-          Il grafico rappresenta l'allocazione automatica "Life Cycle" suggerita dalla COVIP per massimizzare il rendimento atteso<br/>e mitigare il rischio volata in prossimità del pensionamento (Riforma 2026).
-        </p>
       </div>
 
-      <footer className="text-center pt-8 border-t border-slate-200">
-        <p className="text-[11px] text-slate-700 font-extrabold uppercase tracking-widest mb-1">
-          Elaborazione a cura di dr. Raffaele Camposano Group Manager
-        </p>
-        <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
-          Gruppo Vomero | Focus Normativo Bilancio 2026
+      <footer className="text-center pt-10">
+        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.4em]">
+          &copy; 2025 Gruppo Vomero | Analisi Legge di Bilancio 2026 - Testo Definitivo
         </p>
       </footer>
     </div>

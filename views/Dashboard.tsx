@@ -44,8 +44,8 @@ const Dashboard: React.FC = () => {
       <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {[
           { label: "Performance Max 2024", val: "19.85%", sub: "PIP Azionario Leader", color: "text-blue-600" },
-          { label: "Zurich ESG Target", val: "15.37%", sub: "Asset Management", color: "text-slate-900" },
-          { label: "Deducibilità 2026", val: "€5.300", sub: "Nuovo Limite Fiscale", color: "text-orange-600" }
+          { label: "Nuovo Limite 2026", val: "€5.300", sub: "Deducibilità Fiscale", color: "text-orange-600" },
+          { label: "Capitale Max 2026", val: "60%", sub: "Nuova Flessibilità", color: "text-emerald-600" }
         ].map((stat, i) => (
           <div key={i} className="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-lg transition-all">
             <div className="text-[10px] font-black text-slate-400 mb-2 uppercase tracking-[0.2em]">{stat.label}</div>
