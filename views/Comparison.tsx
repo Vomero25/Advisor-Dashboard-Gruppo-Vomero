@@ -2,7 +2,7 @@
 import React, { useState, useMemo } from 'react';
 import { PENSION_DATA } from '../data/pensionData';
 import { PensionType, LineCategory, PensionLine } from '../types';
-import { ShieldCheck, Info, ArrowUpDown } from 'lucide-react';
+import { ShieldCheck, Info, ArrowUpDown, AlertCircle } from 'lucide-react';
 
 type SortField = keyof PensionLine;
 type SortOrder = 'asc' | 'desc';
@@ -45,7 +45,7 @@ const Comparison: React.FC = () => {
     <div className="max-w-full mx-auto space-y-8 animate-fade-in pb-16">
       <header className="bg-white rounded-[2.5rem] p-8 border border-slate-200 shadow-sm flex flex-col lg:flex-row justify-between items-center gap-6">
         <div className="space-y-1">
-          <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase italic">Analisi Comparativa <span className="text-blue-600">Multidimensionale</span></h2>
+          <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase italic italic">Analisi Comparativa <span className="text-blue-600">Multidimensionale</span></h2>
           <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">Dati Certificati Mefop & Prospetti 2024</p>
         </div>
         <div className="flex flex-wrap gap-4">
@@ -121,8 +121,15 @@ const Comparison: React.FC = () => {
         </div>
       </div>
 
+      <div className="p-6 bg-slate-900 rounded-[2.5rem] border border-slate-800 text-white/60 text-[10px] leading-relaxed italic space-y-2">
+        <div className="flex items-center gap-2 text-blue-400 font-black uppercase mb-1">
+          <AlertCircle size={14} /> Nota Legale sui Rendimenti
+        </div>
+        <p>I rendimenti passati non costituiscono alcun tipo di garanzia per i rendimenti futuri. I dati esposti riflettono le performance storiche nette (o lorde dove specificato) estratte dai Prospetti Informativi e dai Bollettini Statistici COVIP/Mefop. Le medie a 3, 5, 10 e 20 anni sono calcolate su base geometrica annualizzata. Prima dell'adesione, è obbligatorio leggere la "Parte I: Le informazioni chiave per l'aderente" e la "Scheda i Costi" di ogni singolo prodotto.</p>
+      </div>
+
       <div className="grid md:grid-cols-2 gap-8">
-        <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden group">
+        <div className="bg-slate-900 rounded-[2.5rem] p-10 text-white relative overflow-hidden group border border-slate-800">
           <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
           <h4 className="text-xl font-black uppercase italic tracking-tighter mb-6 flex items-center gap-3">
              <div className="w-2 h-6 bg-blue-600 rounded-full"></div> Nota Tecnica Dr. Camposano
@@ -133,7 +140,7 @@ const Comparison: React.FC = () => {
         </div>
         <div className="bg-white rounded-[2.5rem] p-10 border border-slate-200 shadow-sm flex flex-col justify-center items-center text-center space-y-4">
            <ShieldCheck size={48} className="text-blue-600" />
-           <p className="text-xs font-black uppercase tracking-widest text-slate-400">Certificazione Dati</p>
+           <p className="text-xs font-black uppercase tracking-widest text-slate-400 italic">Certificazione Dati</p>
            <p className="text-lg font-bold text-slate-900 italic">Dati consolidati su serie storica Bollettino Mefop n. 96</p>
         </div>
       </div>
