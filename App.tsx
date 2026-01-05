@@ -7,7 +7,7 @@ import Bilancio2026 from './views/Bilancio2026';
 import MarketStats from './views/MarketStats';
 
 const navItems = [
-  { path: '/', label: 'Home', icon: '📊' },
+  { path: '/', label: 'Home', icon: '🏠' },
   { path: '/market-stats', label: 'Market', icon: '📈' },
   { path: '/comparison', label: 'Confronto', icon: '⚖️' },
   { path: '/bilancio-2026', label: '2026', icon: '📜' },
@@ -19,7 +19,7 @@ const DesktopSidebar: React.FC = () => (
       <h1 className="text-xl font-bold tracking-tight text-blue-400 italic uppercase">Gruppo Vomero</h1>
       <p className="text-[10px] text-slate-400 font-black uppercase tracking-widest">Pension Advisor Tool</p>
     </div>
-    <nav className="flex-1 space-y-2">
+    <nav className="flex-1 space-y-1">
       {navItems.map((item) => (
         <NavLink
           key={item.path}
@@ -33,7 +33,7 @@ const DesktopSidebar: React.FC = () => (
           }
         >
           <span className="text-lg">{item.icon}</span>
-          <span className="font-bold text-[11px] uppercase tracking-wider">{item.label}</span>
+          <span className="font-bold text-[10px] uppercase tracking-wider">{item.label}</span>
         </NavLink>
       ))}
     </nav>
@@ -50,19 +50,19 @@ const DesktopSidebar: React.FC = () => (
 );
 
 const MobileBottomNav: React.FC = () => (
-  <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-slate-200 flex justify-around items-center px-2 py-3 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+  <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-slate-200 flex justify-around items-center px-2 py-3 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.05)] overflow-x-auto no-scrollbar">
     {navItems.map((item) => (
       <NavLink
         key={item.path}
         to={item.path}
         className={({ isActive }) =>
-          `flex flex-col items-center gap-1 transition-all duration-300 ${
+          `flex flex-col items-center gap-1 min-w-[60px] transition-all duration-300 ${
             isActive ? 'text-blue-600 scale-110' : 'text-slate-400'
           }`
         }
       >
-        <span className="text-xl">{item.icon}</span>
-        <span className="text-[9px] font-black uppercase tracking-tighter">{item.label}</span>
+        <span className="text-lg">{item.icon}</span>
+        <span className="text-[8px] font-black uppercase tracking-tighter">{item.label}</span>
       </NavLink>
     ))}
   </nav>

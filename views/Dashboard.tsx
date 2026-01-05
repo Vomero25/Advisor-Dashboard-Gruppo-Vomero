@@ -2,10 +2,8 @@
 import React from 'react';
 import { PENSION_DATA } from '../data/pensionData';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts';
-import { useNavigate } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
   const topPerformers = [...PENSION_DATA]
     .sort((a, b) => b.return2024 - a.return2024)
     .slice(0, 5);
@@ -17,7 +15,7 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto space-y-12 animate-in fade-in duration-700 pb-16">
+    <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-700 pb-16">
       
       {/* Header Istituzionale */}
       <header className="bg-slate-900 rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
@@ -63,9 +61,9 @@ const Dashboard: React.FC = () => {
       {/* Grafici Analitici */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
-          <h3 className="text-lg font-black mb-8 flex items-center gap-3 text-slate-800 uppercase tracking-tight">
+          <h3 className="text-lg font-black mb-8 flex items-center gap-3 text-slate-800 uppercase tracking-tight text-[12px] tracking-[0.1em]">
             <span className="w-2 h-6 bg-blue-600 rounded-full"></span>
-            Ranking Rendimenti 2024 (%)
+            RANKING RENDIMENTI 2024 (%)
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -88,9 +86,9 @@ const Dashboard: React.FC = () => {
         </div>
 
         <div className="bg-white p-8 rounded-[2.5rem] border border-slate-200 shadow-sm">
-          <h3 className="text-lg font-black mb-8 flex items-center gap-3 text-slate-800 uppercase tracking-tight">
+          <h3 className="text-lg font-black mb-8 flex items-center gap-3 text-slate-800 uppercase tracking-tight text-[12px] tracking-[0.1em]">
             <span className="w-2 h-6 bg-orange-500 rounded-full"></span>
-            Costo Medio Sistema (ISC)
+            COSTO MEDIO SISTEMA (ISC)
           </h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
