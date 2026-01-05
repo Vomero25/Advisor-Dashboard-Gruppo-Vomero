@@ -23,10 +23,8 @@ export interface PensionLine {
   return3y: number;
   return5y: number;
   return10y: number;
-  isc10y?: number; // Synthetic Cost Indicator at 10 years
-}
-
-export interface ComparisonResult {
-  target: PensionLine;
-  competitors: PensionLine[];
+  return20y?: number; // Nuova profondità a 20 anni
+  isc10y: number;
+  volatility?: number;
+  sharpeRatio?: number;
 }

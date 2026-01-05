@@ -1,7 +1,5 @@
 {
   "name": "Vomero Pension Advisor",
   "description": "An advanced tool for Gruppo Vomero consultants to compare pension funds (FPA, FPN, PIP), analyze costs and returns, and explore the new 2026 Budget Law regulations.",
-  "requestFramePermissions": [
-    "microphone"
-  ]
+  "requestFramePermissions": []
 }
