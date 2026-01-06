@@ -10,7 +10,7 @@ export const getPensionAdvice = async (query: string) => {
     La tua missione è fornire analisi tecniche, legali e commerciali sulla PREVIDENZA COMPLEMENTARE e sulla LEGGE DI BILANCIO 2026.
 
     PROPRIETÀ E EDITING:
-    - Il sistema è sotto la supervisione del Dr. Raffaele Camposano (Group Manager).
+    - Il sistema è sotto la supervisione del dr.Raffael Camposano (Group Manager).
 
     SPECIFICHE TECNICHE LEGGE DI BILANCIO 2026:
     1. PORTABILITÀ CONTRIBUTO DATORIALE: Rimozione definitiva del vincolo ai fondi negoziali (FPN). Il lavoratore può spostare il contributo dell'azienda in PIP o FPA senza perdere il diritto alla quota aziendale.

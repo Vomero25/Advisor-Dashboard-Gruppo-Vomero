@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo } from 'react';
-import { Info, Calculator, Landmark, ShieldCheck, TrendingUp, Percent, CheckCircle2, AlertTriangle, Scale, Lock } from 'lucide-react';
+import { Info, Calculator, Landmark, ShieldCheck, CheckCircle2, AlertTriangle, Scale, Lock } from 'lucide-react';
 
 // Tabella Coefficienti di Conversione (Aggiornata per Audit Gruppo Vomero)
 const COEFFICIENTS_INPS: Record<number, number> = {
@@ -28,10 +28,6 @@ const FiscalCalculator: React.FC = () => {
 
   const results = useMemo(() => {
     // Calcolo IRPEF PROGRESSIVO (Sistema 2025/2026)
-    // 0-28.000 -> 23%
-    // 28.000 - 50.000 -> 35%
-    // > 50.000 -> 43%
-    
     const calculateTax = (income: number) => {
       let tax = 0;
       if (income <= 28000) {
@@ -50,21 +46,18 @@ const FiscalCalculator: React.FC = () => {
     const taxSaving = taxBeforeDeduction - taxAfterDeduction;
     const netCost = contribution - taxSaving;
 
-    // Aliquota Marginale per visualizzazione
     let marginalRate = 0.23;
     if (ral > 50000) marginalRate = 0.43;
     else if (ral > 28000) marginalRate = 0.35;
 
-    // Proiezione Finanziaria
     const yearsToRetire = targetAge - age;
-    const estimatedReturn = 0.045; // 4.5% Benchmark Prudenziale
+    const estimatedReturn = 0.045; 
     
     let totalAccumulated = 0;
     for (let i = 0; i < yearsToRetire; i++) {
       totalAccumulated = (totalAccumulated + contribution) * (1 + estimatedReturn);
     }
 
-    // Tassazione agevolata 15-9%
     const participationYears = yearsToRetire + 5; 
     let finalTaxRate = 0.15;
     if (participationYears > 15) {
@@ -72,8 +65,6 @@ const FiscalCalculator: React.FC = () => {
     }
     
     const netAccumulated = totalAccumulated * (1 - finalTaxRate);
-    
-    // Calcolo con Coefficienti INPS
     const coeff = COEFFICIENTS_INPS[targetAge] || 0.04812;
     const monthlyAnnuity = (netAccumulated * coeff) / 12;
 
@@ -101,7 +92,7 @@ const FiscalCalculator: React.FC = () => {
         </div>
         <div className="bg-slate-950 px-6 py-3 rounded-2xl border border-slate-800 flex items-center gap-3 text-white">
           <Lock className="text-blue-500" size={20} />
-          <span className="text-[11px] font-black uppercase tracking-widest italic">Protocollo Dr. Camposano</span>
+          <span className="text-[11px] font-black uppercase tracking-widest italic">Protocollo dr.Raffael Camposano</span>
         </div>
       </header>
 
@@ -211,7 +202,7 @@ const FiscalCalculator: React.FC = () => {
                 <strong>3. Rendimenti Finanziari:</strong> L'ipotesi del 4.5% annuo è basata su parametri storici di comparti azionari/bilanciati ESG. Non garantisce performance future.
                 <br/><br/>
                 <strong>4. Valenza Proposta:</strong> La presente simulazione non costituisce sollecitazione al pubblico risparmio. Prima dell'adesione, consultare i Set Informativi depositati in COVIP. 
-                Editing e supervisione tecnica: <strong>Dr. Raffaele Camposano</strong>.
+                editing : dr.Raffael Camposano Group Manager.
                </p>
             </div>
           </div>

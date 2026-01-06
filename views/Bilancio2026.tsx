@@ -1,5 +1,5 @@
+
 import React from 'react';
-import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, BarChart, Bar, Cell } from 'recharts';
 import { ShieldAlert, TrendingUp, Zap, Briefcase, Calculator, Landmark, ShieldCheck } from 'lucide-react';
 
 const Bilancio2026: React.FC = () => {
@@ -45,7 +45,7 @@ const Bilancio2026: React.FC = () => {
           <h1 className="text-3xl md:text-4xl font-black uppercase italic tracking-tighter mb-2">
             Legge di Bilancio 2026: <span className="text-blue-500">Analisi Tecnica</span>
           </h1>
-          <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest">Protocollo Gruppo Vomero | Supervisore: Dr. Raffaele Camposano</p>
+          <p className="text-slate-400 font-bold uppercase text-[10px] tracking-widest">Protocollo Gruppo Vomero | editing : dr.Raffael Camposano Group Manager</p>
         </div>
       </header>
 
@@ -82,7 +82,11 @@ const Bilancio2026: React.FC = () => {
         <div className="md:w-1/3 bg-white/10 backdrop-blur-md p-6 rounded-[2rem] border border-white/20 w-full">
           <p className="text-center text-[10px] font-black uppercase tracking-widest mb-4">Target di Riferimento</p>
           <ul className="space-y-2">
-            {['Iscritti a Fondi di Categoria', 'Dipendenti Settore Chimico/Metalm.', 'Management con RAL > 45k'].map(t => (
+            {[
+              'Iscritti a Fondi di Categoria', 
+              'Dipendenti Settore Chimico/Metalm.', 
+              `Management con RAL ${">"} 45k`
+            ].map(t => (
               <li key={t} className="flex items-center gap-2 text-xs font-bold">
                 <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full"></div> {t}
               </li>
@@ -158,7 +162,7 @@ const Bilancio2026: React.FC = () => {
            L'applicativo ha finalità puramente illustrative per consulenti professionisti. L'effettivo impatto fiscale e pensionistico dipende dalla situazione individuale dell'aderente. 
            Si raccomanda la consultazione dei Set Informativi ufficiali e delle circolari Ministeriali/COVIP prima di ogni proposta commerciale.
            <br/><br/>
-           Editing tecnico e supervisione normativa: <strong>Dr. Raffaele Camposano Group Manager</strong>.
+           editing : dr.Raffael Camposano Group Manager.
          </p>
       </div>
     </div>

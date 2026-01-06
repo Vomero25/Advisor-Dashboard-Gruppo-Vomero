@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { PENSION_DATA } from '../data/pensionData.ts';
 import { MARKET_STATUS_DATA } from '../data/marketStatusData.ts';
 import { XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts';
-import { ShieldCheck, TrendingUp, Users, Target, Zap, ArrowRight, Briefcase } from 'lucide-react';
+import { Target, Zap, ArrowRight, Briefcase, ShieldCheck, TrendingUp } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const Dashboard: React.FC = () => {
@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
               Pension Advisor <span className="text-blue-500">- Gruppo Vomero</span>
             </h1>
             <p className="text-slate-400 text-sm font-bold uppercase tracking-widest max-w-xl">
-              Sistema di supporto decisionale d'élite. Editing: Dr. Raffaele Camposano Group Manager.
+              Sistema di supporto decisionale d'élite. editing : dr.Raffael Camposano Group Manager.
             </p>
           </div>
           <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-6 md:p-8 rounded-[2rem] border-l-4 border-l-blue-500 w-full lg:w-auto">
@@ -75,7 +75,7 @@ const Dashboard: React.FC = () => {
           </div>
           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Miglior Rendimento PIP 2024</p>
           <p className="text-4xl font-black text-slate-900 tracking-tighter">19.85%</p>
-          <p className="text-[10px] text-slate-500 mt-4 leading-relaxed font-medium italic">Riferimento mercato (Analisi Dr. Camposano)</p>
+          <p className="text-[10px] text-slate-500 mt-4 leading-relaxed font-medium italic">Riferimento mercato (Analisi dr.Raffael Camposano)</p>
         </div>
 
         <div className="bg-slate-900 p-8 rounded-[2.5rem] shadow-2xl group hover:shadow-xl transition-all text-white border-b-4 border-b-amber-500">
@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Footer Branding - UPDATED AS REQUESTED */}
+      {/* Footer Branding */}
       <footer className="text-center pt-10 border-t border-slate-200">
         <div className="flex items-center justify-center gap-3 mb-4">
            <ShieldCheck className="text-blue-600" size={20} />

@@ -3,7 +3,7 @@ import React, { useState, useMemo } from 'react';
 import { PENSION_DATA } from '../data/pensionData.ts';
 import { PensionType, LineCategory, PensionLine } from '../types.ts';
 import { 
-  ArrowUpDown, Zap, TrendingUp, Search, 
+  ArrowUpDown, Zap, Search, 
   CheckCircle2, AlertCircle, Info, ShieldCheck, Target
 } from 'lucide-react';
 
@@ -193,7 +193,7 @@ const Comparison: React.FC = () => {
          <div className="space-y-1">
             <h4 className="text-[11px] font-black text-blue-400 uppercase tracking-widest italic">Protocollo Audit Gruppo Vomero</h4>
             <p className="text-[10px] text-slate-400 leading-relaxed font-medium">
-              Il sistema evidenzia in modalità Audit i prodotti con ISC &gt; 2.40%. Questi rappresentano il portafoglio ideale per l'applicazione della portabilità 2026. La riduzione media di costo attesa passando a Zurich è del 0.35-0.50% annuo, con impatto esponenziale sul montante finale.
+              Il sistema evidenzia in modalità Audit i prodotti con ISC {">"} 2.40%. Questi rappresentano il portafoglio ideale per l'applicazione della portabilità 2026. La riduzione media di costo attesa è del 0.35-0.50% annuo, con impatto esponenziale sul montante finale.
             </p>
          </div>
       </div>
