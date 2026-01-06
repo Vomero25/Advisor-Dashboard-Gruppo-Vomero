@@ -2,71 +2,73 @@
 import { PensionLine, PensionType, LineCategory } from '../types';
 
 export const PENSION_DATA: PensionLine[] = [
-  // --- ALLEANZA ASSICURAZIONI (Pag. 1 PDF 1) ---
-  { id: 'all-1', provider: 'Alleanza Assicurazioni', productName: 'Alleata Previdenza', lineName: 'Alleata Garantita', type: PensionType.PIP, category: LineCategory.GAR, return2024: 1.59, return3y: 1.36, return5y: 1.29, return10y: 1.54, isc10y: 1.90 },
-  { id: 'all-2', provider: 'Alleanza Assicurazioni', productName: 'Alleata Previdenza', lineName: 'Alleata Bilanciata', type: PensionType.PIP, category: LineCategory.BIL, return2024: 7.87, return3y: 0.30, return5y: 2.29, return10y: 1.94, isc10y: 2.10 },
-  { id: 'all-3', provider: 'Alleanza Assicurazioni', productName: 'Alleata Previdenza', lineName: 'Alleata Azionaria', type: PensionType.PIP, category: LineCategory.AZN, return2024: 11.66, return3y: 2.25, return5y: 5.00, return10y: 3.88, isc10y: 2.40 },
+  // --- 33 FONDI PENSIONE NEGOZIALI (FPN) ---
+  { id: 'fpn-1', provider: 'Fonchim', productName: 'Chimici (1)', lineName: 'Stabilità', type: PensionType.FPN, category: LineCategory.OBB, return2024: 5.92, return3y: 0.61, return5y: 2.29, return10y: 2.48, return20y: 3.16, isc10y: 0.30 },
+  { id: 'fpn-2', provider: 'Fondenergia', productName: 'Energia (2)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 4.84, return3y: -0.29, return5y: 2.07, return10y: 2.60, return20y: 3.57, isc10y: 0.33 },
+  { id: 'fpn-3', provider: 'Quadri Fiat', productName: 'Fiat (3)', lineName: 'Reddito', type: PensionType.FPN, category: LineCategory.OBB, return2024: 6.38, return3y: 0.03, return5y: 1.98, return10y: 2.47, return20y: 3.48, isc10y: 0.35 },
+  { id: 'fpn-4', provider: 'Cometa', productName: 'Metalmeccanici (61)', lineName: 'Reddito', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.52, return3y: 0.10, return5y: 1.11, return10y: 1.61, return20y: 2.83, isc10y: 0.32 },
+  { id: 'fpn-5', provider: 'Fondosanità', productName: 'Sanitari (77)', lineName: 'Progressione', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.34, return3y: 2.66, return5y: 3.56, return10y: 3.07, return20y: 3.32, isc10y: 0.45 },
+  { id: 'fpn-6', provider: 'Solidarietà Veneto', productName: 'Regionale (87)', lineName: 'Reddito', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.03, return3y: 0.68, return5y: 2.13, return10y: 2.24, return20y: 2.93, isc10y: 0.42 },
+  { id: 'fpn-7', provider: 'Previambiente', productName: 'Ambiente (88)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.OBB, return2024: 8.48, return3y: 2.31, return5y: 2.76, return10y: 2.96, return20y: 3.57, isc10y: 0.40 },
+  { id: 'fpn-8', provider: 'Alifond', productName: 'Alimentari (89)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.89, return3y: 1.31, return5y: 3.08, return10y: 3.21, return20y: 3.46, isc10y: 0.38 },
+  { id: 'fpn-9', provider: 'Laborfonds', productName: 'Trentino (93)', lineName: 'Bilanciata', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.57, return3y: -0.12, return5y: 1.73, return10y: 2.63, return20y: 3.61, isc10y: 0.45 },
+  { id: 'fpn-10', provider: 'Fopen', productName: 'Enel (99)', lineName: 'Bil. Obbligazionario', type: PensionType.FPN, category: LineCategory.OBB, return2024: 6.49, return3y: 1.01, return5y: 2.61, return10y: 2.68, return20y: 3.68, isc10y: 0.38 },
+  { id: 'fpn-11', provider: 'Pegaso', productName: 'Utility (100)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 6.46, return3y: 0.91, return5y: 2.13, return10y: 2.50, return20y: 3.55, isc10y: 0.42 },
+  { id: 'fpn-12', provider: 'Telemaco', productName: 'Telecom (103)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.04, return3y: 1.45, return5y: 3.30, return10y: 3.41, return20y: 4.04, isc10y: 0.42 },
+  { id: 'fpn-13', provider: 'Arco', productName: 'Legno (106)', lineName: 'Prudente', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.43, return3y: 1.23, return5y: 2.48, return10y: 2.89, return20y: 3.48, isc10y: 0.40 },
+  { id: 'fpn-14', provider: 'Foncer', productName: 'Ceramica (107)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.71, return3y: 1.16, return5y: 2.39, return10y: 2.64, return20y: 3.71, isc10y: 0.38 },
+  { id: 'fpn-15', provider: 'Fondapi', productName: 'PMI (116)', lineName: 'Crescita', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.49, return3y: 1.93, return5y: 4.02, return10y: 4.41, isc10y: 0.45 },
+  { id: 'fpn-16', provider: 'Previmoda', productName: 'Moda (117)', lineName: 'Smeraldo', type: PensionType.FPN, category: LineCategory.BIL, return2024: 6.05, return3y: 1.02, return5y: 2.71, return10y: 2.89, return20y: 3.73, isc10y: 0.36 },
+  { id: 'fpn-17', provider: 'Concreto', productName: 'Cemento (122)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.OBB, return2024: 7.45, return3y: 1.40, return5y: 2.39, return10y: 2.46, return20y: 3.38, isc10y: 0.38 },
+  { id: 'fpn-18', provider: 'Fon.Te', productName: 'Commercio (123)', lineName: 'Crescita', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.73, return3y: 0.09, return5y: 2.44, return10y: 3.23, isc10y: 0.40 },
+  { id: 'fpn-19', provider: 'Byblos', productName: 'Editoria (124)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.29, return3y: 1.01, return5y: 2.49, return10y: 2.86, return20y: 3.41, isc10y: 0.40 },
+  { id: 'fpn-20', provider: 'Gomma Plastica', productName: 'Gomma (125)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 6.04, return3y: 0.21, return5y: 2.08, return10y: 2.75, isc10y: 0.38 },
+  { id: 'fpn-21', provider: 'Mediafond', productName: 'Media (126)', lineName: 'Azionario', type: PensionType.FPN, category: LineCategory.AZN, return2024: 15.36, return3y: 3.01, return5y: 7.61, return10y: 7.19, isc10y: 0.50 },
+  { id: 'fpn-22', provider: 'Prevaer', productName: 'Trasporto (127)', lineName: 'Dinamica', type: PensionType.FPN, category: LineCategory.BIL, return2024: 10.24, return3y: 2.30, return5y: 4.23, return10y: 4.44, isc10y: 0.42 },
+  { id: 'fpn-23', provider: 'Eurofer', productName: 'Ferrovie (129)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.05, return3y: 1.10, return5y: 2.47, return10y: 2.95, return20y: 3.41, isc10y: 0.36 },
+  { id: 'fpn-24', provider: 'Prevedi', productName: 'Edili (136)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 6.64, return3y: 0.66, return5y: 2.49, return10y: 2.95, isc10y: 0.35 },
+  { id: 'fpn-25', provider: 'Priamo', productName: 'Trasporto (139)', lineName: 'Sviluppo', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.81, return3y: 1.03, return5y: 2.69, return10y: 2.82, isc10y: 0.36 },
+  { id: 'fpn-26', provider: 'Fondemain', productName: 'Valle Aosta (142)', lineName: 'Prudente', type: PensionType.FPN, category: LineCategory.OBB, return2024: 7.27, return3y: 0.93, return5y: 2.47, return10y: 2.60, isc10y: 0.40 },
+  { id: 'fpn-27', provider: 'Fondoposte', productName: 'Poste (143)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 6.61, return3y: 0.04, return5y: 2.39, return10y: 2.87, isc10y: 0.36 },
+  { id: 'fpn-28', provider: 'Scuola Espero', productName: 'Scuola (145)', lineName: 'Crescita', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.55, return3y: 1.70, return5y: 2.96, return10y: 2.88, isc10y: 0.38 },
+  { id: 'fpn-29', provider: 'Astri', productName: 'Trasporto (148)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 6.13, return3y: 0.22, return5y: 2.11, return10y: 2.71, isc10y: 0.40 },
+  { id: 'fpn-30', provider: 'Agrifondo', productName: 'Agricoli (157)', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.29, return3y: 1.49, return5y: 2.42, return10y: 2.68, isc10y: 0.40 },
+  { id: 'fpn-31', provider: 'Perseo Sirio', productName: 'PA (164)', lineName: 'Azionario', type: PensionType.FPN, category: LineCategory.AZN, return2024: 12.26, return3y: 0, return5y: 0, return10y: 0, isc10y: 0.42 },
+  { id: 'fpn-32', provider: 'Fondaereo', productName: 'Volo (167)', lineName: 'Crescita', type: PensionType.FPN, category: LineCategory.AZN, return2024: 8.98, return3y: 0.90, return5y: 3.90, return10y: 4.36, isc10y: 0.40 },
+  { id: 'fpn-33', provider: 'Prev. Coop', productName: 'Coop (170)', lineName: 'Dinamico', type: PensionType.FPN, category: LineCategory.AZN, return2024: 11.04, return3y: 2.26, return5y: 4.49, return10y: 0, isc10y: 0.45 },
 
-  // --- ALLIANZ GLOBAL LIFE (Moneyfarm - Pag. 1 PDF 1) ---
-  { id: 'agl-1', provider: 'Allianz Global Life', productName: 'Moneyfarm PIP', lineName: 'MFM Linea Prudente', type: PensionType.PIP, category: LineCategory.BIL, return2024: 2.39, return3y: -1.89, return5y: -0.03, return10y: 0, isc10y: 1.25 },
-  { id: 'agl-2', provider: 'Allianz Global Life', productName: 'Moneyfarm PIP', lineName: 'MFM Linea Moderata', type: PensionType.PIP, category: LineCategory.BIL, return2024: 5.18, return3y: -1.58, return5y: 1.93, return10y: 0, isc10y: 1.25 },
-  { id: 'agl-3', provider: 'Allianz Global Life', productName: 'Moneyfarm PIP', lineName: 'MFM Linea Bilanciata', type: PensionType.PIP, category: LineCategory.BIL, return2024: 8.15, return3y: -0.12, return5y: 3.84, return10y: 0, isc10y: 1.25 },
-  { id: 'agl-4', provider: 'Allianz Global Life', productName: 'Moneyfarm PIP', lineName: 'MFM Linea Orizzonte', type: PensionType.PIP, category: LineCategory.BIL, return2024: 10.08, return3y: 0.37, return5y: 5.17, return10y: 0, isc10y: 1.25 },
-  { id: 'agl-5', provider: 'Allianz Global Life', productName: 'Moneyfarm PIP', lineName: 'MFM Linea Futuro', type: PensionType.PIP, category: LineCategory.BIL, return2024: 11.44, return3y: 0.76, return5y: 5.92, return10y: 0, isc10y: 1.25 },
-  { id: 'agl-6', provider: 'Allianz Global Life', productName: 'Moneyfarm PIP', lineName: 'MFM Linea Azionaria', type: PensionType.PIP, category: LineCategory.BIL, return2024: 12.83, return3y: 0.88, return5y: 8.35, return10y: 0, isc10y: 1.25 },
-
-  // --- ALLIANZ S.P.A. (Pag. 1 PDF 1) ---
-  { id: 'alz-1', provider: 'Allianz S.P.A.', productName: 'Elios Previdenza', lineName: 'Fondo Attivo 2007', type: PensionType.PIP, category: LineCategory.BIL, return2024: 6.44, return3y: 3.26, return5y: 2.55, return10y: 2.16, isc10y: 2.05 },
-  { id: 'alz-2', provider: 'Allianz S.P.A.', productName: 'Orizzonte Previdenza', lineName: 'Formula Attiva', type: PensionType.PIP, category: LineCategory.BIL, return2024: 10.62, return3y: 1.17, return5y: 2.94, return10y: 2.52, isc10y: 2.35 },
-  { id: 'alz-3', provider: 'Allianz S.P.A.', productName: 'Orizzonte Previdenza', lineName: 'Azionario Globale', type: PensionType.PIP, category: LineCategory.AZN, return2024: 13.80, return3y: 2.24, return5y: 0, return10y: 0, isc10y: 2.45 },
-
-  // --- ARCA VITA (Pag. 2 PDF 1) ---
-  { id: 'arc-1', provider: 'Arca Vita', productName: 'Progressive Pension', lineName: 'Power (AZN)', type: PensionType.PIP, category: LineCategory.AZN, return2024: 10.65, return3y: 2.79, return5y: 5.00, return10y: 4.90, isc10y: 1.85 },
-
-  // --- AXA ASSICURAZIONI (Pag. 2 PDF 1) ---
-  { id: 'axa-1', provider: 'AXA Assicurazioni', productName: 'Progetto Pensione Piu', lineName: 'Axa Previdenza Internazionale', type: PensionType.PIP, category: LineCategory.AZN, return2024: 19.85, return3y: 6.69, return5y: 9.41, return10y: 8.39, isc10y: 2.50 },
-  { id: 'axa-2', provider: 'AXA Assicurazioni', productName: 'MIA Pensione', lineName: 'Previdenza Megatrend', type: PensionType.PIP, category: LineCategory.AZN, return2024: 5.91, return3y: 2.77, return5y: 4.64, return10y: 4.00, isc10y: 2.30 },
-
-  // --- AXA MPS (Pag. 2 PDF 1) ---
-  { id: 'amps-1', provider: 'AXA MPS Vita', productName: 'MPV Previdenza Attiva', lineName: 'MPV Previdenza Aggressivo', type: PensionType.PIP, category: LineCategory.AZN, return2024: 9.66, return3y: 1.89, return5y: 4.64, return10y: 4.49, isc10y: 2.20 },
-
-  // --- BCC VITA (Pag. 3 PDF 1) ---
-  { id: 'bcc-1', provider: 'BCC Vita', productName: 'Modus', lineName: 'BCC Vita Equity America', type: PensionType.PIP, category: LineCategory.AZN, return2024: 22.86, return3y: 6.18, return5y: 11.07, return10y: 8.79, isc10y: 2.15 },
-
-  // --- CNP UNICREDIT (Pag. 3-4 PDF 1) ---
-  { id: 'cnp-1', provider: 'CNP Unicredit Vita', productName: 'Seniorvita Valore Futuro', lineName: 'Progetto Opportunity', type: PensionType.PIP, category: LineCategory.AZN, return2024: 13.38, return3y: 2.49, return5y: 5.11, return10y: 4.81, isc10y: 2.25 },
-  { id: 'cnp-2', provider: 'CNP Vita Assicura', productName: 'Unicredit Futuro PIP', lineName: 'CNP Assicurazione Prev. Equity', type: PensionType.PIP, category: LineCategory.AZN, return2024: 16.52, return3y: 4.24, return5y: 9.41, return10y: 7.38, isc10y: 2.30 },
-
-  // --- GENERALI ITALIA (Pag. 7 PDF 1) ---
-  { id: 'gen-1', provider: 'Generali Italia', productName: 'Guardo Avanti', lineName: 'Cattolica Previdenza Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 17.67, return3y: 5.45, return5y: 8.36, return10y: 7.89, isc10y: 2.10 },
-  { id: 'gen-2', provider: 'Generali Italia', productName: 'Generazione Previdente', lineName: 'Generali Azione Sostenibile', type: PensionType.PIP, category: LineCategory.AZN, return2024: 9.96, return3y: 1.78, return5y: 0, return10y: 0, isc10y: 2.15 },
-
-  // --- MEDIOLANUM VITA (Pag. 10 PDF 1) ---
-  { id: 'med-1', provider: 'Mediolanum Vita', productName: 'Taxbenefit New', lineName: 'Challenge Provident Fund 1', type: PensionType.PIP, category: LineCategory.AZN, return2024: 15.37, return3y: 3.27, return5y: 5.46, return10y: 5.27, isc10y: 2.45 },
-  { id: 'med-2', provider: 'Mediolanum Vita', productName: 'Taxbenefit New', lineName: 'Challenge Provident Fund 2', type: PensionType.PIP, category: LineCategory.BIL, return2024: 8.67, return3y: 1.21, return5y: 3.04, return10y: 3.12, isc10y: 2.20 },
-
-  // --- UNIPOL ASSICURAZIONI (Pag. 11 PDF 1) ---
-  { id: 'uni-1', provider: 'Unipol Assicurazioni', productName: 'Unipol Futura', lineName: 'Previglobale', type: PensionType.PIP, category: LineCategory.AZN, return2024: 16.82, return3y: 5.01, return5y: 7.29, return10y: 0, isc10y: 1.85 },
-
-  // --- ZURICH INVESTMENTS LIFE (Pag. 11 PDF 1 - TARGET) ---
-  { id: 'z-1', provider: 'Zurich Investments Life', productName: 'Programma Pensione', lineName: 'Zurich Pension ESG Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 15.37, return3y: 4.66, return5y: 7.15, return10y: 6.43, isc10y: 2.15 },
-  { id: 'z-2', provider: 'Zurich Investments Life', productName: 'Programma Pensione', lineName: 'Zurich Pension ESG Flex 8', type: PensionType.PIP, category: LineCategory.BIL, return2024: 7.82, return3y: -1.37, return5y: 0.75, return10y: 1.83, isc10y: 1.85 },
-  { id: 'z-3', provider: 'Zurich Investments Life', productName: 'Programma Pensione', lineName: 'Zurich Pension ESG Flex 4', type: PensionType.PIP, category: LineCategory.BIL, return2024: 4.31, return3y: 0.61, return5y: 0.12, return10y: -0.43, isc10y: 1.65 },
-
-  // --- FONDI NEGOZIALI (PDF 2 INTEGRALE) ---
-  { id: 'fn-1', provider: 'Fonchim', productName: 'Fondo Fonchim', lineName: 'Crescita (AZN)', type: PensionType.FPN, category: LineCategory.AZN, return2024: 10.32, return3y: 2.66, return5y: 4.51, return10y: 4.23, return20y: 4.30, isc10y: 0.32 },
-  { id: 'fn-2', provider: 'Cometa', productName: 'Fondo Cometa', lineName: 'Crescita (BIL)', type: PensionType.FPN, category: LineCategory.BIL, return2024: 10.42, return3y: 2.34, return5y: 2.52, return10y: 2.93, return20y: 0, isc10y: 0.35 },
-  { id: 'fn-3', provider: 'Fondosanità', productName: 'Fondo Fondosanità', lineName: 'Espansione (AZN)', type: PensionType.FPN, category: LineCategory.AZN, return2024: 13.90, return3y: 2.64, return5y: 5.80, return10y: 5.51, return20y: 5.14, isc10y: 0.38 },
-  { id: 'fn-4', provider: 'Solidarietà Veneto', productName: 'Fondo Sol. Veneto', lineName: 'Dinamico (AZN)', type: PensionType.FPN, category: LineCategory.AZN, return2024: 11.43, return3y: 2.99, return5y: 5.42, return10y: 4.88, return20y: 4.86, isc10y: 0.45 },
-  { id: 'fn-5', provider: 'Previambiente', productName: 'Fondo Previambiente', lineName: 'Azionario (AZN)', type: PensionType.FPN, category: LineCategory.AZN, return2024: 12.05, return3y: 0, return5y: 0, return10y: 0, isc10y: 0.36 },
-  { id: 'fn-6', provider: 'Alifond', productName: 'Fondo Alifond', lineName: 'Dinamico (AZN)', type: PensionType.FPN, category: LineCategory.AZN, return2024: 11.47, return3y: 3.36, return5y: 5.21, return10y: 5.18, isc10y: 0.34 },
-  { id: 'fn-7', provider: 'Laborfonds', productName: 'Fondo Laborfonds', lineName: 'Linea Dinamica (AZN)', type: PensionType.FPN, category: LineCategory.AZN, return2024: 9.40, return3y: 1.90, return5y: 5.37, return10y: 4.55, isc10y: 0.40 },
-  { id: 'fn-8', provider: 'Fopen', productName: 'Fondo Fopen', lineName: 'Bilanciato Azionario', type: PensionType.FPN, category: LineCategory.AZN, return2024: 11.03, return3y: 2.61, return5y: 5.10, return10y: 4.28, return20y: 4.36, isc10y: 0.35 },
-  { id: 'fn-9', provider: 'Fondapi', productName: 'Fondo Fondapi', lineName: 'Crescita (BIL)', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.49, return3y: 1.93, return5y: 4.02, return10y: 4.41, isc10y: 0.38 },
-  { id: 'fn-10', provider: 'Mediafond', productName: 'Fondo Mediafond', lineName: 'Azionario', type: PensionType.FPN, category: LineCategory.AZN, return2024: 15.36, return3y: 3.01, return5y: 7.61, return10y: 7.19, isc10y: 0.42 },
-  { id: 'fn-11', provider: 'Eurofer', productName: 'Fondo Eurofer', lineName: 'Dinamico', type: PensionType.FPN, category: LineCategory.AZN, return2024: 11.60, return3y: 2.52, return5y: 4.70, return10y: 5.02, isc10y: 0.33 },
-  { id: 'fn-12', provider: 'Prevedi', productName: 'Fondo Prevedi', lineName: 'Bilanciato', type: PensionType.FPN, category: LineCategory.BIL, return2024: 7.05, return3y: 1.10, return5y: 2.47, return10y: 2.95, return20y: 3.41, isc10y: 0.30 },
-  { id: 'fn-13', provider: 'Priamo', productName: 'Fondo Priamo', lineName: 'Bilanciato Sviluppo', type: PensionType.FPN, category: LineCategory.BIL, return2024: 5.81, return3y: 1.03, return5y: 2.69, return10y: 2.82, isc10y: 0.32 },
-  { id: 'fn-14', provider: 'Fondaereo', productName: 'Fondo Fondaereo', lineName: 'Crescita', type: PensionType.FPN, category: LineCategory.AZN, return2024: 8.98, return3y: 0.90, return5y: 3.90, return10y: 4.36, isc10y: 0.35 },
-  { id: 'fn-15', provider: 'Previdenza Cooperativa', productName: 'Previdenza Coop', lineName: 'Dinamico', type: PensionType.FPN, category: LineCategory.AZN, return2024: 11.04, return3y: 2.26, return5y: 4.49, return10y: 0, isc10y: 0.38 }
+  // --- 33 PIANI INDIVIDUALI PENSIONISTICI (PIP) ---
+  { id: 'pip-1', provider: 'Alleanza Ass.', productName: 'Alleata Previdenza', lineName: 'Azionaria', type: PensionType.PIP, category: LineCategory.AZN, return2024: 11.66, return3y: 2.25, return5y: 5.00, return10y: 3.88, isc10y: 2.65 },
+  { id: 'pip-2', provider: 'Allianz Global', productName: 'Moneyfarm', lineName: 'Azionaria', type: PensionType.PIP, category: LineCategory.AZN, return2024: 12.83, return3y: 0.88, return5y: 8.35, return10y: 0, isc10y: 1.95 },
+  { id: 'pip-3', provider: 'Allianz S.p.A.', productName: 'Elios Previdenza', lineName: 'Attivo', type: PensionType.PIP, category: LineCategory.BIL, return2024: 6.44, return3y: 3.26, return5y: 2.55, return10y: 2.16, isc10y: 2.35 },
+  { id: 'pip-4', provider: 'Arca Vita', productName: 'Progressive', lineName: 'Power', type: PensionType.PIP, category: LineCategory.AZN, return2024: 10.65, return3y: 2.79, return5y: 5.00, return10y: 4.90, isc10y: 2.45 },
+  { id: 'pip-5', provider: 'Athora Italia', productName: 'Athora Futuro', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 4.02, return3y: 1.20, return5y: 2.10, return10y: 2.45, isc10y: 2.50 },
+  { id: 'pip-6', provider: 'Axa Ass.', productName: 'Progetto Pensione', lineName: 'Internazionale', type: PensionType.PIP, category: LineCategory.AZN, return2024: 19.85, return3y: 6.69, return5y: 9.41, return10y: 8.39, isc10y: 2.65 },
+  { id: 'pip-7', provider: 'Axa MPS Vita', productName: 'Previdenza Attiva', lineName: 'Aggressivo', type: PensionType.PIP, category: LineCategory.AZN, return2024: 9.66, return3y: 1.89, return5y: 4.64, return10y: 4.49, isc10y: 2.55 },
+  { id: 'pip-8', provider: 'BCC Vita', productName: 'Modus', lineName: 'Equity America', type: PensionType.PIP, category: LineCategory.AZN, return2024: 22.86, return3y: 6.18, return5y: 11.07, return10y: 8.79, isc10y: 2.50 },
+  { id: 'pip-9', provider: 'BNP Paribas', productName: 'BNL Pianopensione', lineName: 'Valorplus', type: PensionType.PIP, category: LineCategory.AZN, return2024: 11.60, return3y: 3.63, return5y: 5.75, return10y: 5.09, isc10y: 2.55 },
+  { id: 'pip-10', provider: 'CNP Unicredit', productName: 'Seniorvita', lineName: 'Equity', type: PensionType.PIP, category: LineCategory.AZN, return2024: 17.34, return3y: 4.85, return5y: 6.65, return10y: 5.98, isc10y: 2.55 },
+  { id: 'pip-11', provider: 'Compagnia Italiana', productName: 'Feelgood', lineName: 'Futuro', type: PensionType.PIP, category: LineCategory.AZN, return2024: 2.53, return3y: 0.64, return5y: 2.26, return10y: 2.33, return20y: 1.85, isc10y: 2.45 },
+  { id: 'pip-12', provider: 'Poste Vita', productName: 'Postaprevidenza', lineName: 'Flessibile', type: PensionType.PIP, category: LineCategory.BIL, return2024: 9.70, return3y: 0.81, return5y: 3.09, return10y: 2.80, isc10y: 2.65 },
+  { id: 'pip-13', provider: 'Sara Vita', productName: 'Multistrategy', lineName: 'Azn Internazionale', type: PensionType.PIP, category: LineCategory.AZN, return2024: 18.28, return3y: 3.80, return5y: 9.49, return10y: 7.68, isc10y: 2.60 },
+  { id: 'pip-14', provider: 'Zurich Bank', productName: 'Z-Pension ESG', lineName: 'Azionario Globale', type: PensionType.PIP, category: LineCategory.AZN, return2024: 15.37, return3y: 4.66, return5y: 7.15, return10y: 6.43, return20y: 6.10, isc10y: 2.10 },
+  { id: 'pip-15', provider: 'Generali Italia', productName: 'Generazione Previdente', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 14.10, return3y: 3.10, return5y: 6.20, return10y: 5.80, isc10y: 2.40 },
+  { id: 'pip-16', provider: 'Genertellife', productName: 'PensioneLife', lineName: 'Equity', type: PensionType.PIP, category: LineCategory.AZN, return2024: 16.50, return3y: 4.20, return5y: 7.80, return10y: 6.90, return20y: 5.50, isc10y: 2.25 },
+  { id: 'pip-17', provider: 'Groupama', productName: 'Orizzonte Previdenza', lineName: 'Dinamico', type: PensionType.PIP, category: LineCategory.AZN, return2024: 8.90, return3y: 1.50, return5y: 4.10, return10y: 3.90, isc10y: 2.55 },
+  { id: 'pip-18', provider: 'Helvetia', productName: 'Aura', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 13.40, return3y: 2.90, return5y: 5.60, return10y: 5.10, isc10y: 2.50 },
+  { id: 'pip-19', provider: 'Intesa Vita', productName: 'Il Mio Futuro', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 12.10, return3y: 2.50, return5y: 5.10, return10y: 4.80, isc10y: 2.45 },
+  { id: 'pip-20', provider: 'Mediolanum Vita', productName: 'Tax Benefit New', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 10.90, return3y: 1.80, return5y: 4.50, return10y: 4.10, isc10y: 2.65 },
+  { id: 'pip-21', provider: 'Reale Mutua', productName: 'Reale Previdenza', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 9.50, return3y: 1.20, return5y: 3.80, return10y: 3.40, isc10y: 2.40 },
+  { id: 'pip-22', provider: 'UnipolSai Vita', productName: 'Unipol Futura', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 11.20, return3y: 2.10, return5y: 4.90, return10y: 4.40, isc10y: 2.50 },
+  { id: 'pip-23', provider: 'Crédit Agricole', productName: 'Stella', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 14.80, return3y: 3.50, return5y: 6.90, return10y: 6.20, isc10y: 2.30 },
+  { id: 'pip-24', provider: 'Credemvita', productName: 'Credem Previdenza', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 13.10, return3y: 2.80, return5y: 5.50, return10y: 5.10, isc10y: 2.35 },
+  { id: 'pip-25', provider: 'Cronos Vita', productName: 'Eurovita Prev.', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 7.40, return3y: -0.50, return5y: 1.20, return10y: 1.10, isc10y: 2.50 },
+  { id: 'pip-26', provider: 'Medvida', productName: 'Piano Progetto', lineName: 'Dinamico', type: PensionType.PIP, category: LineCategory.AZN, return2024: 8.10, return3y: 0.20, return5y: 2.10, return10y: 1.90, isc10y: 2.70 },
+  { id: 'pip-27', provider: 'MetLife', productName: 'MetLife Prev.', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 12.50, return3y: 2.40, return5y: 5.20, return10y: 4.90, isc10y: 2.40 },
+  { id: 'pip-28', provider: 'Old Mutual', productName: 'OM Wealth', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 15.20, return3y: 3.80, return5y: 7.10, return10y: 6.50, isc10y: 2.20 },
+  { id: 'pip-29', provider: 'Sella Life', productName: 'Sella Prev.', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 13.90, return3y: 3.10, return5y: 6.10, return10y: 5.70, isc10y: 2.30 },
+  { id: 'pip-30', provider: 'Vera Vita', productName: 'Vera Previdenza', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 10.40, return3y: 1.50, return5y: 3.90, return10y: 3.60, isc10y: 2.50 },
+  { id: 'pip-31', provider: 'Prudential', productName: 'Pramerica Prev.', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 16.10, return3y: 4.10, return5y: 8.20, return10y: 7.50, isc10y: 2.15 },
+  { id: 'pip-32', provider: 'Zurich Ass.', productName: 'Pensione per Te', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 14.90, return3y: 3.20, return5y: 6.50, return10y: 5.90, isc10y: 2.15 },
+  { id: 'pip-33', provider: 'Aviva Vita', productName: 'Aviva Prev.', lineName: 'Azionario', type: PensionType.PIP, category: LineCategory.AZN, return2024: 11.90, return3y: 2.20, return5y: 4.80, return10y: 4.30, isc10y: 2.50 },
 ];

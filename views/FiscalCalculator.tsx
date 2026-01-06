@@ -1,27 +1,63 @@
 
 import React, { useState, useMemo } from 'react';
-import { Info, Calculator, Landmark, ShieldCheck, TrendingUp, Percent, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Info, Calculator, Landmark, ShieldCheck, TrendingUp, Percent, CheckCircle2, AlertTriangle, Scale, Lock } from 'lucide-react';
+
+// Tabella Coefficienti di Conversione (Aggiornata per Audit Gruppo Vomero)
+const COEFFICIENTS_INPS: Record<number, number> = {
+  60: 0.03875,
+  61: 0.03988,
+  62: 0.04101,
+  63: 0.04223,
+  64: 0.04355,
+  65: 0.04496,
+  66: 0.04648,
+  67: 0.04812, // Coefficiente standard vecchiaia
+  68: 0.04988,
+  69: 0.05179,
+  70: 0.05386,
+  71: 0.05612
+};
 
 const FiscalCalculator: React.FC = () => {
   const [ral, setRal] = useState<number>(45000);
   const [contribution, setContribution] = useState<number>(5300);
   const [age, setAge] = useState<number>(35);
+  const [targetAge, setTargetAge] = useState<number>(67);
 
-  const DEDUCTIBILITY_LIMIT = 5300;
+  const DEDUCTIBILITY_LIMIT = 5300; // Valore Legge di Bilancio 2026
 
   const results = useMemo(() => {
-    // Aliquote IRPEF 2026 Presunte
+    // Calcolo IRPEF PROGRESSIVO (Sistema 2025/2026)
+    // 0-28.000 -> 23%
+    // 28.000 - 50.000 -> 35%
+    // > 50.000 -> 43%
+    
+    const calculateTax = (income: number) => {
+      let tax = 0;
+      if (income <= 28000) {
+        tax = income * 0.23;
+      } else if (income <= 50000) {
+        tax = (28000 * 0.23) + ((income - 28000) * 0.35);
+      } else {
+        tax = (28000 * 0.23) + (22000 * 0.35) + ((income - 50000) * 0.43);
+      }
+      return tax;
+    };
+
+    const effectiveDeduction = Math.min(contribution, DEDUCTIBILITY_LIMIT);
+    const taxBeforeDeduction = calculateTax(ral);
+    const taxAfterDeduction = calculateTax(ral - effectiveDeduction);
+    const taxSaving = taxBeforeDeduction - taxAfterDeduction;
+    const netCost = contribution - taxSaving;
+
+    // Aliquota Marginale per visualizzazione
     let marginalRate = 0.23;
     if (ral > 50000) marginalRate = 0.43;
     else if (ral > 28000) marginalRate = 0.35;
 
-    const effectiveDeduction = Math.min(contribution, DEDUCTIBILITY_LIMIT);
-    const taxSaving = effectiveDeduction * marginalRate;
-    const netCost = contribution - taxSaving;
-
     // Proiezione Finanziaria
-    const yearsToRetire = 67 - age;
-    const estimatedReturn = 0.045; // 4.5% Benchmark Zurich Azionario ESG
+    const yearsToRetire = targetAge - age;
+    const estimatedReturn = 0.045; // 4.5% Benchmark Prudenziale
     
     let totalAccumulated = 0;
     for (let i = 0; i < yearsToRetire; i++) {
@@ -29,14 +65,17 @@ const FiscalCalculator: React.FC = () => {
     }
 
     // Tassazione agevolata 15-9%
-    const participationYears = yearsToRetire + 5; // Ipotizziamo 5 anni di pregresso
+    const participationYears = yearsToRetire + 5; 
     let finalTaxRate = 0.15;
     if (participationYears > 15) {
       finalTaxRate = Math.max(0.09, 0.15 - ((participationYears - 15) * 0.003));
     }
     
     const netAccumulated = totalAccumulated * (1 - finalTaxRate);
-    const monthlyAnnuity = (netAccumulated * 0.042) / 12; // Coeff. conversione stima
+    
+    // Calcolo con Coefficienti INPS
+    const coeff = COEFFICIENTS_INPS[targetAge] || 0.04812;
+    const monthlyAnnuity = (netAccumulated * coeff) / 12;
 
     return {
       marginalRate: (marginalRate * 100).toFixed(0),
@@ -45,22 +84,24 @@ const FiscalCalculator: React.FC = () => {
       netAccumulated,
       monthlyAnnuity,
       finalTaxRate: (finalTaxRate * 100).toFixed(1),
-      yearsToRetire
+      yearsToRetire,
+      coeff: (coeff * 100).toFixed(3),
+      isExceeding: contribution > DEDUCTIBILITY_LIMIT
     };
-  }, [ral, contribution, age]);
+  }, [ral, contribution, age, targetAge]);
 
   return (
     <div className="max-w-6xl mx-auto space-y-10 animate-fade-in pb-20">
       <header className="bg-white rounded-[2.5rem] p-10 border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-6">
         <div className="space-y-2">
           <h2 className="text-3xl font-black text-slate-900 tracking-tighter uppercase italic flex items-center gap-3">
-            <Calculator className="text-blue-600" /> Simulatore <span className="text-blue-600">Leva Fiscale</span>
+            <Calculator className="text-blue-600" /> Simulatore <span className="text-blue-600">Audit Fiscale 2026</span>
           </h2>
-          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">Analisi Efficienza Fiscale Legge 2026</p>
+          <p className="text-slate-400 text-[10px] font-black uppercase tracking-[0.2em]">Blindaggio Dati FPN/PIP - Gruppo Vomero</p>
         </div>
-        <div className="bg-blue-50 px-6 py-3 rounded-2xl border border-blue-100 flex items-center gap-3">
-          <ShieldCheck className="text-blue-600" size={20} />
-          <span className="text-[11px] font-black text-blue-700 uppercase tracking-widest italic">Modello dr. Raffaele Camposano</span>
+        <div className="bg-slate-950 px-6 py-3 rounded-2xl border border-slate-800 flex items-center gap-3 text-white">
+          <Lock className="text-blue-500" size={20} />
+          <span className="text-[11px] font-black uppercase tracking-widest italic">Protocollo Dr. Camposano</span>
         </div>
       </header>
 
@@ -69,59 +110,59 @@ const FiscalCalculator: React.FC = () => {
         <div className="lg:col-span-4 space-y-6">
           <div className="bg-white p-8 rounded-[3rem] border border-slate-200 shadow-sm space-y-8">
             <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] flex items-center gap-2 italic">
-              <Landmark size={16} className="text-blue-600" /> Profilo Finanziario
+              <Landmark size={16} className="text-blue-600" /> Analisi Reddito & Versamenti
             </h3>
             
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">RAL (Reddito Annuo Lordo)</label>
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Reddito Annuo Lordo (RAL)</label>
                 <div className="relative">
-                  <input type="number" value={ral} onChange={(e) => setRal(Number(e.target.value))} className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-4 font-black text-slate-900 focus:border-blue-600 focus:bg-white outline-none transition-all" />
-                  <span className="absolute right-5 top-4.5 font-black text-slate-300">€</span>
+                  <span className="absolute left-5 top-1/2 -translate-y-1/2 font-black text-slate-400">€</span>
+                  <input type="number" value={ral} onChange={(e) => setRal(Number(e.target.value))} className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl pl-10 pr-5 py-4 font-black text-slate-900 focus:border-blue-600 outline-none transition-all" />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Versamento Annuo</label>
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Versamento Annuo Proposto</label>
                 <div className="relative">
-                  <input type="number" value={contribution} onChange={(e) => setContribution(Number(e.target.value))} className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-4 font-black text-slate-900 focus:border-blue-600 focus:bg-white outline-none transition-all" />
-                  <span className="absolute right-5 top-4.5 font-black text-slate-300">€</span>
+                  <span className="absolute left-5 top-1/2 -translate-y-1/2 font-black text-slate-400">€</span>
+                  <input type="number" value={contribution} onChange={(e) => setContribution(Number(e.target.value))} className={`w-full bg-slate-50 border-2 rounded-2xl pl-10 pr-5 py-4 font-black text-slate-900 focus:border-blue-600 outline-none transition-all ${results.isExceeding ? 'border-amber-400' : 'border-slate-100'}`} />
                 </div>
+                {results.isExceeding && (
+                  <p className="text-[9px] text-amber-600 font-black uppercase italic mt-1 flex items-center gap-1">
+                    <AlertTriangle size={10} /> Eccedenza Deducibilità 2026 (€5.300)
+                  </p>
+                )}
               </div>
 
-              <div className="space-y-3">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-500 flex justify-between italic">
-                  Età Attuale: <span className="text-blue-600 font-black">{age} anni</span>
-                </label>
-                <input type="range" min="20" max="65" value={age} onChange={(e) => setAge(Number(e.target.value))} className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600" />
-                <div className="flex justify-between text-[9px] font-black text-slate-400 uppercase tracking-tighter">
-                  <span>Start</span>
-                  <span className="bg-slate-100 px-2 rounded-full">Orizzonte: {results.yearsToRetire}y</span>
-                  <span>Pension</span>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Età Attuale</label>
+                  <input type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-4 font-black text-slate-900 focus:border-blue-600 outline-none" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-500">Età Target</label>
+                  <select value={targetAge} onChange={(e) => setTargetAge(Number(e.target.value))} className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 py-4 font-black text-slate-900 focus:border-blue-600 outline-none">
+                    {Object.keys(COEFFICIENTS_INPS).map(a => <option key={a} value={a}>{a} anni</option>)}
+                  </select>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-slate-900 p-8 rounded-[3rem] text-white space-y-6 shadow-2xl relative overflow-hidden border border-slate-800">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 flex items-center gap-2 italic">
-              <Info size={14} /> Presupposti Tecnici
+          <div className="bg-blue-600 p-8 rounded-[3rem] text-white space-y-6 shadow-xl shadow-blue-200">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-200 flex items-center gap-2 italic">
+              <Scale size={14} /> Audit Coefficienti
             </h4>
-            <div className="space-y-5">
-              {[
-                { t: "Deduzione IRPEF", d: `Sottrazione diretta dall'imponibile con recupero all'aliquota marginale (${results.marginalRate}%).` },
-                { t: "Tetto Deducibilità", d: "Limite innalzato a €5.300 (Legge 2026) per favorire i redditi elevati." },
-                { t: "Costo Netto", d: `Lo Stato finanzia il ${results.marginalRate}% del tuo investimento futuro.` }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-4">
-                  <CheckCircle2 size={16} className="text-blue-500 shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-[10px] font-black uppercase text-slate-200 mb-1">{item.t}</p>
-                    <p className="text-[11px] text-slate-400 font-medium leading-relaxed">{item.d}</p>
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-4">
+              <div className="p-4 bg-white/10 rounded-2xl border border-white/20">
+                <p className="text-[10px] font-black uppercase text-blue-200 mb-1">Coeff. Trasformazione INPS</p>
+                <p className="text-2xl font-black">{results.coeff}%</p>
+                <p className="text-[9px] text-blue-100 mt-1 uppercase">Basato su tavole di mortalità attese</p>
+              </div>
+              <p className="text-[11px] text-blue-50 leading-relaxed italic font-medium">
+                I dati riflettono l'integrazione tra previdenza pubblica e complementare prevista dal protocollo Vomero 26.
+              </p>
             </div>
           </div>
         </div>
@@ -129,65 +170,49 @@ const FiscalCalculator: React.FC = () => {
         {/* RESULTS PANEL */}
         <div className="lg:col-span-8 space-y-8">
           <div className="grid md:grid-cols-2 gap-8">
-            {/* CARD EFFICIENZA */}
-            <div className="bg-blue-600 rounded-[3rem] p-10 text-white shadow-2xl shadow-blue-200 relative group cursor-default">
-              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-125 transition-transform">
-                <Percent size={120} />
-              </div>
-              <div className="relative z-10 space-y-12">
-                <div>
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-200 mb-2 italic">Bonus Fiscale Annuo</p>
-                  <div className="text-6xl font-black tracking-tighter">€{results.taxSaving.toLocaleString('it-IT')}</div>
-                  <div className="mt-4 flex items-center gap-2 text-blue-100 font-bold uppercase text-[11px]">
-                    <TrendingUp size={14} /> 
-                    <span>Efficienza: +{results.marginalRate}% annuo</span>
-                  </div>
-                </div>
-                <div className="pt-8 border-t border-white/20">
-                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-200 mb-2 italic">Il tuo investimento reale</p>
-                  <div className="text-3xl font-black italic">€{results.netCost.toLocaleString('it-IT')}</div>
-                  <p className="text-[11px] font-medium text-blue-100 opacity-80 mt-1 uppercase tracking-tight">Costo netto post-deduzione</p>
-                </div>
+            <div className="bg-slate-950 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl"></div>
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-2 italic">Risparmio Fiscale Certificato (IRPEF)</p>
+              <div className="text-6xl font-black tracking-tighter">€{Math.round(results.taxSaving).toLocaleString('it-IT')}</div>
+              <div className="mt-8 pt-8 border-t border-white/10">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500 mb-2 italic">Costo Netto Reale dell'investimento</p>
+                <div className="text-3xl font-black italic text-blue-500">€{Math.round(results.netCost).toLocaleString('it-IT')}</div>
               </div>
             </div>
 
-            {/* CARD PROIEZIONE */}
-            <div className="bg-white rounded-[3rem] p-10 border border-slate-200 shadow-sm space-y-10 flex flex-col">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-black text-slate-900 uppercase italic tracking-tighter">Asset Pensionistico</h3>
-                <TrendingUp className="text-emerald-500" />
-              </div>
-              
-              <div className="flex-1 space-y-10">
-                <div className="space-y-2">
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest italic">Montante Netto Stimato</p>
-                  <p className="text-5xl font-black text-slate-900 tracking-tighter">€{Math.round(results.netAccumulated).toLocaleString('it-IT')}</p>
-                </div>
-
-                <div className="space-y-2">
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest italic">Integrazione Mensile Netta</p>
-                  <p className="text-5xl font-black text-blue-600 tracking-tighter">€{Math.round(results.monthlyAnnuity).toLocaleString('it-IT')}</p>
+            <div className="bg-white rounded-[3rem] p-10 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div className="space-y-2">
+                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest italic">Rendita Mensile Netta Stimata</p>
+                <p className="text-6xl font-black text-slate-900 tracking-tighter">€{Math.round(results.monthlyAnnuity).toLocaleString('it-IT')}</p>
+                <div className="flex items-center gap-2 mt-2">
+                   <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-black uppercase tracking-tighter">Tassazione Agevolata: {results.finalTaxRate}%</span>
                 </div>
               </div>
-
-              <div className="p-5 bg-slate-50 rounded-[2rem] border border-slate-100">
-                <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-                  <span className="text-slate-400">Tassazione Prestazione:</span>
-                  <span className="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">{results.finalTaxRate}%</span>
-                </div>
+              <div className="pt-8 mt-8 border-t border-slate-100">
+                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest italic">Montante Finale Netto (Proiezione)</p>
+                <p className="text-2xl font-black text-blue-600 uppercase">€{Math.round(results.netAccumulated).toLocaleString('it-IT')}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-amber-50 border border-amber-200 p-8 rounded-[3rem] flex flex-col md:flex-row items-start gap-6">
-            <div className="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center shrink-0">
-               <AlertTriangle className="text-amber-600" size={24} />
+          {/* DISCLAIMER INTEGRALE BLINDATO */}
+          <div className="bg-slate-50 border border-slate-200 p-8 rounded-[3rem] space-y-5">
+            <div className="flex items-center gap-3">
+              <ShieldCheck className="text-blue-600" size={24} />
+              <h4 className="text-xs font-black text-slate-900 uppercase tracking-[0.2em] italic">Audit Disclaimer & Data Governance</h4>
             </div>
-            <div className="space-y-2">
-              <h4 className="text-xs font-black text-amber-900 uppercase tracking-[0.2em] italic">Disclaimer Metodologico del Calcolo</h4>
-              <p className="text-[11px] text-amber-800 leading-relaxed font-medium italic">
-                I calcoli sopra riportati sono simulazioni basate sulle attuali aliquote IRPEF previste dalla Riforma 2026 e su un rendimento lordo annuo costante del 4.5%. L'effettivo risparmio fiscale dipende dalla capienza dell'imponibile del contribuente e da eventuali addizionali locali. Il montante finale è una stima puramente indicativa e non garantita, soggetta alla variabilità dei mercati finanziari e alla tassazione vigente al momento dell'erogazione. Non costituisce garanzia di rendita futura.
-              </p>
+            <div className="grid md:grid-cols-2 gap-6">
+               <p className="text-[10px] text-slate-600 leading-relaxed font-medium">
+                <strong>1. Precisione Fiscale:</strong> Il calcolo IRPEF è effettuato per scaglioni progressivi (23/35/43%) secondo le proiezioni 2026. L'effettivo risparmio dipende dalla capienza fiscale e dall'imponibile complessivo dichiarato dal contribuente.
+                <br/><br/>
+                <strong>2. Coefficienti INPS:</strong> Le stime di rendita utilizzano i coefficienti di trasformazione ex L. 335/95 e successive revisioni ministeriali. Tali valori sono puramente indicativi e soggetti a variazioni triennali.
+               </p>
+               <p className="text-[10px] text-slate-600 leading-relaxed font-medium">
+                <strong>3. Rendimenti Finanziari:</strong> L'ipotesi del 4.5% annuo è basata su parametri storici di comparti azionari/bilanciati ESG. Non garantisce performance future.
+                <br/><br/>
+                <strong>4. Valenza Proposta:</strong> La presente simulazione non costituisce sollecitazione al pubblico risparmio. Prima dell'adesione, consultare i Set Informativi depositati in COVIP. 
+                Editing e supervisione tecnica: <strong>Dr. Raffaele Camposano</strong>.
+               </p>
             </div>
           </div>
         </div>
